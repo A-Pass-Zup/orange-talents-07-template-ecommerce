@@ -1,3 +1,3 @@
-# Por favor faça um Fork desse projeto!
+# Fork A-Pass-Zup/orange-talents-07-template-ecommerce
 
-## Está em dúvida de como fazer um Fork? Não tem problema! [Aqui tem uma explicação do que entendemos que você deve considerar!](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+Projeto desenvolvido para o desafio do bootcamp na Zup - Orange Talents #7
