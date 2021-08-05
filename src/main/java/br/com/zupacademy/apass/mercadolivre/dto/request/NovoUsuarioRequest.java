@@ -1,6 +1,7 @@
 package br.com.zupacademy.apass.mercadolivre.dto.request;
 
 import br.com.zupacademy.apass.mercadolivre.model.Usuario;
+import br.com.zupacademy.apass.mercadolivre.validation.constraints.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ public class NovoUsuarioRequest {
 
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Usuario.class, fieldName = "login")
     private String login;
 
     @NotBlank
