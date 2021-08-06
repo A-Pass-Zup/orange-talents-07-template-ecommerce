@@ -59,4 +59,11 @@ public class Usuario {
     @Deprecated
     private Usuario() {}
 
+    public String getLogin() {
+        return this.login;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
 }
