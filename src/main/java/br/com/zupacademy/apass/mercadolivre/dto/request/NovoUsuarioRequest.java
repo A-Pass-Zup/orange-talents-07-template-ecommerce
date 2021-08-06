@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.dto.request;
 
-import br.com.zupacademy.apass.mercadolivre.model.Usuario;
+import br.com.zupacademy.apass.mercadolivre.model.entity.Usuario;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.UniqueValue;
 
 import javax.validation.constraints.Email;

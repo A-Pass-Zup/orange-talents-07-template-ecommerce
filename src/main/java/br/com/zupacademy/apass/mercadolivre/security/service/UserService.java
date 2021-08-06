@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.security.service;
 
-import br.com.zupacademy.apass.mercadolivre.model.Usuario;
+import br.com.zupacademy.apass.mercadolivre.model.entity.Usuario;
 import br.com.zupacademy.apass.mercadolivre.security.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

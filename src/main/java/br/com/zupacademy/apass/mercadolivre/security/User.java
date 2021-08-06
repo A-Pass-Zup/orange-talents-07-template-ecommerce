@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.security;
 
-import br.com.zupacademy.apass.mercadolivre.model.Usuario;
+import br.com.zupacademy.apass.mercadolivre.model.entity.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +12,10 @@ public class User implements UserDetails {
 
     public User(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return this.usuario;
     }
 
     @Override

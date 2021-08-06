@@ -1,12 +1,11 @@
 package br.com.zupacademy.apass.mercadolivre.dto.request;
 
-import br.com.zupacademy.apass.mercadolivre.model.Categoria;
+import br.com.zupacademy.apass.mercadolivre.model.entity.Categoria;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.ExistsId;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.UniqueValue;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 
 public class NovaCategoriaRequest {
 

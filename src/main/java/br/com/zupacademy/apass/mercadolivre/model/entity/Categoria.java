@@ -1,4 +1,4 @@
-package br.com.zupacademy.apass.mercadolivre.model;
+package br.com.zupacademy.apass.mercadolivre.model.entity;
 
 import org.springframework.util.Assert;
 

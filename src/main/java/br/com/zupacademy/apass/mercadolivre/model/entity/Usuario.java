@@ -1,4 +1,4 @@
-package br.com.zupacademy.apass.mercadolivre.model;
+package br.com.zupacademy.apass.mercadolivre.model.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
