@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/produto/imagens")
+@RequestMapping("/api/v1/produto/")
 public class ProdutoImagensController {
 
     @Autowired
@@ -22,9 +22,11 @@ public class ProdutoImagensController {
     @Autowired
     private SalvaProdutoImagensService salvaProdutoImagensService;
 
-    @PostMapping
+    @PostMapping("/{produtoId}/imagens")
     @Transactional
     public void cadastro(@Valid NovasImagensProdutoRequest novasImagensProdutoRequest) {
+
+       // Produto produto = this.entityManager.find(Produto.class, produtoId);
 
         Produto produto = novasImagensProdutoRequest.getProduto(this.entityManager);
 

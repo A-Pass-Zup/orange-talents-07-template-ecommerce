@@ -2,6 +2,7 @@ package br.com.zupacademy.apass.mercadolivre.dto.request;
 
 import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.ExistsId;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
@@ -18,9 +19,9 @@ public class NovasImagensProdutoRequest {
 
     @NotNull
     @Size(min=1)
-    private Set<MultipartFile> imagens = new HashSet<>();
+    private Set<MultipartFile> imagens;
 
-    public NovasImagensProdutoRequest(@NotNull Long produtoId, @NotNull @Size(min=1) Set<MultipartFile> imagens) {
+    public NovasImagensProdutoRequest(@PathVariable @NotNull Long produtoId, @NotNull @Size(min=1) Set<MultipartFile> imagens) {
         this.produtoId = produtoId;
         this.imagens = imagens;
     }
