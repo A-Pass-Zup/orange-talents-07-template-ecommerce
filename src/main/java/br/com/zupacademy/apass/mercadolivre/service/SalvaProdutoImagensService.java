@@ -1,6 +1,5 @@
 package br.com.zupacademy.apass.mercadolivre.service;
 
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;

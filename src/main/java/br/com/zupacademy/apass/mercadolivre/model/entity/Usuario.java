@@ -1,7 +1,5 @@
 package br.com.zupacademy.apass.mercadolivre.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.Assert;
 

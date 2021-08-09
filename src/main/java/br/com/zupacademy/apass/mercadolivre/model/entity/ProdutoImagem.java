@@ -1,6 +1,5 @@
 package br.com.zupacademy.apass.mercadolivre.model.entity;
 
-import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;

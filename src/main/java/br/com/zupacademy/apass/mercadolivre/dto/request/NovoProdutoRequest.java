@@ -4,10 +4,12 @@ import br.com.zupacademy.apass.mercadolivre.model.entity.Categoria;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Usuario;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.ExistsId;
+import org.hibernate.mapping.Collection;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,24 @@ public class NovoProdutoRequest {
         this.descricao = descricao;
         this.caracteristicas = caracteristicas;
         this.categoriaId = categoriaId;
+    }
+
+    /**
+     * Obtém as caracterícias somente como leitura.
+     *
+     * @return
+     */
+    public Set<CaracteristicaRequest> getCaracteristicas() {
+        return Collections.unmodifiableSet(caracteristicas);
+    }
+
+    public Boolean existeCaracteristicaDuplicada() {
+        for (var caracteristicaReq : this.caracteristicas) {
+            if(this.caracteristicas.stream().anyMatch(c -> c != caracteristicaReq && caracteristicaReq.nomesSaoIguais(c))) {
+                return true;
+            }
+        }
+        return  false;
     }
 
     public Produto converte(Usuario usuario, EntityManager entityManager) {
