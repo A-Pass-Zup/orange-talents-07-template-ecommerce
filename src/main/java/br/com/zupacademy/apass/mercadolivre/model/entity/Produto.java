@@ -40,13 +40,15 @@ public class Produto {
     private Categoria categoria;
 
     @Size(min=3)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
     private final Set<Caracteristica> caracteristicas = new HashSet<>();
 
     @NotNull
     @ManyToOne(optional = false)
     private Usuario usuarioCadastro;
+
+    @OneToMany(mappedBy = "id" ,cascade = CascadeType.MERGE)
+    private Set<ProdutoImagem> imagens;
 
     @Deprecated
     protected Produto() {
@@ -85,6 +87,15 @@ public class Produto {
                 .collect(Collectors.toSet()));
 
         this.usuarioCadastro = usuarioCadastro;
+    }
+
+    /**
+     * Adicina imagens ao produto.
+     *
+     * @param imagem
+     */
+    public void addImagem(String imagem) {
+        this.imagens.add(new ProdutoImagem(this, imagem));
     }
 
     @Override
