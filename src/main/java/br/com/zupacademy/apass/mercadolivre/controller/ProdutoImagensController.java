@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/produto/imagens")
@@ -23,9 +24,9 @@ public class ProdutoImagensController {
 
     @PostMapping
     @Transactional
-    public void cadastro(NovasImagensProdutoRequest novasImagensProdutoRequest) {
+    public void cadastro(@Valid NovasImagensProdutoRequest novasImagensProdutoRequest) {
 
-        Produto produto = novasImagensProdutoRequest.converteParaProduto(this.entityManager);
+        Produto produto = novasImagensProdutoRequest.getProduto(this.entityManager);
 
         var imagens  = this.salvaProdutoImagensService.
                 salva(novasImagensProdutoRequest.getImagens());

@@ -25,7 +25,7 @@ public class NovasImagensProdutoRequest {
         this.imagens = imagens;
     }
 
-    public Produto converteParaProduto(EntityManager entityManager) {
+    public Produto getProduto(EntityManager entityManager) {
         return entityManager.find(Produto.class, this.produtoId);
     }
 

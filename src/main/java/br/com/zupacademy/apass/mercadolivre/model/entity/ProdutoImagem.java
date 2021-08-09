@@ -5,6 +5,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 public class ProdutoImagem {
@@ -34,5 +35,18 @@ public class ProdutoImagem {
 
         this.produto = produto;
         this.imagem = imagem;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoImagem that = (ProdutoImagem) o;
+        return Objects.equals(produto, that.produto) && Objects.equals(imagem, that.imagem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(produto, imagem);
     }
 }
