@@ -38,12 +38,11 @@ public class NovaOpiniaoProdutoRequest {
         this.descricao = descricao;
     }
 
-    public Produto converteParaProdutoComOpiniao(Usuario usuarioLogado, EntityManager entityManager) {
-
-        var produto = entityManager.find(Produto.class, this.produtoId);
-
-        produto.addOpniao(new ProdutoOpiniao(this.titulo, this.nota, this.descricao, produto, usuarioLogado));
-
-        return produto;
+    public ProdutoOpiniao converte(Usuario usuarioLogado, EntityManager entityManager) {
+        return new ProdutoOpiniao(this.titulo,
+                this.nota,
+                this.descricao,
+                entityManager.find(Produto.class, this.produtoId),
+                usuarioLogado);
     }
 }

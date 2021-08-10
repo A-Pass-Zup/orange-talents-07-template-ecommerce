@@ -61,8 +61,20 @@ public class ProdutoOpiniao {
         this.titulo = titulo;
         this.nota = nota;
         this.descricao = descricao;
+
         this.produto = produto;
+        this.produto.addOpniao(this);
+
         this.usuarioLogado = usuarioLogado;
+    }
+
+    /**
+     * Obtém o produto da opinião.
+     *
+     * @return
+     */
+    public Produto getProduto() {
+        return produto;
     }
 
     public Boolean pertenceAoProduto(Produto produto) {

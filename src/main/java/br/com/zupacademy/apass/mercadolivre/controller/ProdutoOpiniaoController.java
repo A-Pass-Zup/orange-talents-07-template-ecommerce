@@ -24,8 +24,9 @@ public class ProdutoOpiniaoController {
     @Transactional
     public void cadastra(@RequestBody @Valid NovaOpiniaoProdutoRequest novaOpniaoProdutoRequest, @AuthenticationPrincipal User usuarioLogado) {
 
-        this.entityManager.merge(
-                novaOpniaoProdutoRequest.converteParaProdutoComOpiniao(
-                        usuarioLogado.getUsuario(), this.entityManager));
+        var opniao = novaOpniaoProdutoRequest.converte(
+                usuarioLogado.getUsuario(), this.entityManager);
+
+        this.entityManager.merge(opniao.getProduto());
     }
 }

@@ -54,10 +54,27 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private List<ProdutoOpiniao> opinioes;
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private List<ProdutoPergunta> perguntas;
+
+    /**
+     * Construtor padrão para a JPA. Não use.
+     */
     @Deprecated
     protected Produto() {
     }
 
+    /**
+     * Construtor com os dados obrigatórios.
+     *
+     * @param nome
+     * @param valor
+     * @param quantidade
+     * @param descricao
+     * @param categoria
+     * @param caracteristicas
+     * @param usuarioCadastro
+     */
     public Produto(@NotBlank String nome,
                    @NotNull @Positive BigDecimal valor,
                    @NotNull @PositiveOrZero Integer quantidade,
@@ -94,7 +111,7 @@ public class Produto {
     }
 
     /**
-     * Adicina imagens ao produto.
+     * Adicina um imagem ao produto.
      *
      * @param imagem
      */
@@ -102,11 +119,60 @@ public class Produto {
         this.imagens.add(new ProdutoImagem(this, imagem));
     }
 
-
+    /**
+     * Adiciona uma opnião ao produto.
+     *
+     * @param produtoOpiniao
+     */
     public void addOpniao(ProdutoOpiniao produtoOpiniao) {
         Assert.state(produtoOpiniao.pertenceAoProduto(this), "A opnião passada não pertence ao produto!");
+        Assert.state(!this.jaExiste(produtoOpiniao), "Não pode adicionar ao produto, uma opnião que já existe!");
 
         this.opinioes.add(produtoOpiniao);
+    }
+
+    /**
+     * Adiciona uma pergunta ao produto.
+     *
+     * @param produtoPergunta
+     */
+    public void addPergunta(ProdutoPergunta produtoPergunta) {
+        Assert.state(produtoPergunta.sobreOProduto(this), "O produto da pergunta deve ser igual ao produto que deseja inserir a pergunta!");
+        Assert.state(!this.jaExiste(produtoPergunta), "Não pode adicionar ao produto, uma pergunta que já existe!");
+
+        this.perguntas.add(produtoPergunta);
+    }
+
+    /**
+     * Verifica se uma instância já foi adicionada ao produto.
+     *
+     * @param pergunta
+     * @return
+     */
+    public boolean jaExiste(ProdutoPergunta pergunta) {
+        return this.perguntas.stream().anyMatch(p -> p == pergunta);
+    }
+
+    public boolean jaExiste(ProdutoOpiniao opiniao) {
+        return this.opinioes.stream().anyMatch(o -> o == opiniao);
+    }
+
+    /**
+     * Obtém o nome do produto.
+     *
+     * @return
+     */
+    public String getNome() {
+        return this.nome;
+    }
+
+    /**
+     * Obtém o usuário dono do produto.
+     *
+     * @return
+     */
+    public Usuario getUsuarioCadastro() {
+        return usuarioCadastro;
     }
 
     @Override
@@ -121,5 +187,4 @@ public class Produto {
                 ", caracteristicas=" + produtoCaracteristicas +
                 '}';
     }
-
 }
