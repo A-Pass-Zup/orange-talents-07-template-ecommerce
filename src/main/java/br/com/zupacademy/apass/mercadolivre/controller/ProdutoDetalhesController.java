@@ -13,13 +13,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/produto")
@@ -36,9 +38,8 @@ public class ProdutoDetalhesController {
 
     @GetMapping("{produtoId}/detalhes")
     public ProdutoDetalhesResponse detalhaProduto(@PathVariable Long produtoId) {
-
         return new ProdutoDetalhesResponse(
-                this.entityManager.find(Produto.class, produtoId),
+                this.verificaProduto(produtoId),
                 this.opiniaoRespository,
                 this.produtoPerguntaRepository);
 
@@ -46,17 +47,28 @@ public class ProdutoDetalhesController {
 
     @GetMapping("{produtoId}/perguntas")
     public Page<ProdutoOpiniaoResponse> listaOpiniao(@PathVariable Long produtoId, @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-
         return this.opiniaoRespository.
-                getByProduto(this.entityManager.find(Produto.class, produtoId), pageable)
+                getByProduto(
+                        this.verificaProduto(produtoId), pageable)
                 .map(ProdutoOpiniaoResponse::new);
     }
 
     @GetMapping("{produtoId}/opinioes")
     public Page<ProdutoPerguntaResponse> listaPerguntas(@PathVariable Long produtoId, @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-
         return this.produtoPerguntaRepository.
-                getByProduto(this.entityManager.find(Produto.class, produtoId), pageable)
+                getByProduto(
+                        this.verificaProduto(produtoId), pageable)
                 .map(ProdutoPerguntaResponse::new);
+    }
+
+    /**
+     * Verifica se o produto existe e o retorna, se não, lança um not found.
+     *
+     * @param produtoId
+     * @return
+     */
+    private Produto verificaProduto(Long produtoId) {
+        return Optional.of(this.entityManager.find(Produto.class, produtoId))
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Nâo foi encontrado o produto com código " + produtoId));
     }
 }
