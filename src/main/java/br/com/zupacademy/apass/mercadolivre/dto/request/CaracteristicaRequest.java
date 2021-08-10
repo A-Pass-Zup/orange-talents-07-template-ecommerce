@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.dto.request;
 
-import br.com.zupacademy.apass.mercadolivre.model.CaracteristicaSimples;
+import br.com.zupacademy.apass.mercadolivre.model.CaracteristicaDeProduto;
 import br.com.zupacademy.apass.mercadolivre.util.DiacriticoUtil;
 
 import javax.validation.constraints.NotBlank;
@@ -19,8 +19,8 @@ public class CaracteristicaRequest {
         this.descricao = descricao;
     }
 
-    public CaracteristicaSimples converte() {
-        return new CaracteristicaSimples(this.nome, this.descricao);
+    public CaracteristicaDeProduto converte() {
+        return new CaracteristicaDeProduto(this.nome, this.descricao);
     }
 
     /**

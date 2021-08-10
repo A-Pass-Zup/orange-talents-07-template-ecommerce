@@ -1,12 +1,13 @@
 package br.com.zupacademy.apass.mercadolivre.model.entity;
 
-import br.com.zupacademy.apass.mercadolivre.model.CaracteristicaSimples;
+import br.com.zupacademy.apass.mercadolivre.model.CaracteristicaDeProduto;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,15 +41,18 @@ public class Produto {
     private Categoria categoria;
 
     @Size(min=3)
-    @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
-    private final Set<Caracteristica> caracteristicas = new HashSet<>();
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
+    private final Set<ProdutoCaracteristica> produtoCaracteristicas = new HashSet<>();
 
     @NotNull
     @ManyToOne(optional = false)
     private Usuario usuarioCadastro;
 
-    @OneToMany(mappedBy = "id" ,cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<ProdutoImagem> imagens;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private List<ProdutoOpiniao> opinioes;
 
     @Deprecated
     protected Produto() {
@@ -59,7 +63,7 @@ public class Produto {
                    @NotNull @PositiveOrZero Integer quantidade,
                    @NotBlank @Size(max=1000) String descricao,
                    @NotNull Categoria categoria,
-                   @NotNull @Size(min=3) Set<CaracteristicaSimples> caracteristicas,
+                   @NotNull @Size(min=3) Set<CaracteristicaDeProduto> caracteristicas,
                    @NotNull Usuario usuarioCadastro) {
 
         Assert.hasText(nome, "Não pode criar produto sem nome!");
@@ -82,7 +86,7 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
 
-        this.caracteristicas.addAll(caracteristicas.stream()
+        this.produtoCaracteristicas.addAll(caracteristicas.stream()
                 .map(cs->cs.converte(this))
                 .collect(Collectors.toSet()));
 
@@ -98,6 +102,13 @@ public class Produto {
         this.imagens.add(new ProdutoImagem(this, imagem));
     }
 
+
+    public void addOpniao(ProdutoOpiniao produtoOpiniao) {
+        Assert.state(produtoOpiniao.pertenceAoProduto(this), "A opnião passada não pertence ao produto!");
+
+        this.opinioes.add(produtoOpiniao);
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -107,7 +118,8 @@ public class Produto {
                 ", quantidade=" + quantidade +
                 ", descricao='" + descricao + '\'' +
                 ", categoria=" + categoria +
-                ", caracteristicas=" + caracteristicas +
+                ", caracteristicas=" + produtoCaracteristicas +
                 '}';
     }
+
 }

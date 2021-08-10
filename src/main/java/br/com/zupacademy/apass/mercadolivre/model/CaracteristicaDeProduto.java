@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.model;
 
-import br.com.zupacademy.apass.mercadolivre.model.entity.Caracteristica;
+import br.com.zupacademy.apass.mercadolivre.model.entity.ProdutoCaracteristica;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import io.jsonwebtoken.lang.Assert;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Classe auxiliar para criação do produto.
  */
-public class CaracteristicaSimples {
+public class CaracteristicaDeProduto {
 
     @NotBlank
     private String nome;
@@ -24,7 +24,7 @@ public class CaracteristicaSimples {
      * @param nome
      * @param descricao
      */
-    public CaracteristicaSimples(@NotBlank String nome, @NotBlank String descricao) {
+    public CaracteristicaDeProduto(@NotBlank String nome, @NotBlank String descricao) {
 
         Assert.hasText(nome, "A característica (simples) precisa ter um nome!");
         Assert.hasText(descricao, "A característica (simples) precisa ter uma descricao.");
@@ -54,15 +54,15 @@ public class CaracteristicaSimples {
      * @param produto
      * @return
      */
-    public Caracteristica converte(Produto produto) {
-        return new Caracteristica(this.nome, this.descricao, produto);
+    public ProdutoCaracteristica converte(Produto produto) {
+        return new ProdutoCaracteristica(this.nome, this.descricao, produto);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CaracteristicaSimples that = (CaracteristicaSimples) o;
+        CaracteristicaDeProduto that = (CaracteristicaDeProduto) o;
         return Objects.equals(nome, that.nome) && Objects.equals(descricao, that.descricao);
     }
 

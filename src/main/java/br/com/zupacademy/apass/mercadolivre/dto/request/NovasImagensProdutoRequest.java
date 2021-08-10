@@ -21,7 +21,7 @@ public class NovasImagensProdutoRequest {
     @Size(min=1)
     private Set<MultipartFile> imagens;
 
-    public NovasImagensProdutoRequest(@PathVariable @NotNull Long produtoId, @NotNull @Size(min=1) Set<MultipartFile> imagens) {
+    public NovasImagensProdutoRequest(@NotNull Long produtoId, @NotNull @Size(min=1) Set<MultipartFile> imagens) {
         this.produtoId = produtoId;
         this.imagens = imagens;
     }
