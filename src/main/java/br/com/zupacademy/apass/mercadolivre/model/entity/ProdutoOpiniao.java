@@ -69,6 +69,32 @@ public class ProdutoOpiniao {
     }
 
     /**
+     * Obtém o título da opinião.
+     * @return
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * Obtém a nota da opinião.
+     *
+     * @return
+     */
+    public Integer getNota() {
+        return nota;
+    }
+
+    /**
+     * Obtém a descrição da opinião.
+     *
+     * @return
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
      * Obtém o produto da opinião.
      *
      * @return

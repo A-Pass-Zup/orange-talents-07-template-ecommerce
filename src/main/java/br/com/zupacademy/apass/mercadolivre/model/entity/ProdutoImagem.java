@@ -37,6 +37,10 @@ public class ProdutoImagem {
         this.imagem = imagem;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

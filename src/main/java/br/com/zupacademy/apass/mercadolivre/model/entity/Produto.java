@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -175,6 +176,60 @@ public class Produto {
         return usuarioCadastro;
     }
 
+    /**
+     * Obtém o valor do produto.
+     *
+     * @return
+     */
+    public BigDecimal getValor() {
+        return this.valor;
+    }
+
+    /**
+     * Obtém a quantidade dísponível do produto.
+     *
+     * @return
+     */
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * Obtém a descrição do produto.
+     *
+     * @return
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * Obtém a categoria do produto.
+     *
+     * @return
+     */
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * Obtém as caracteríticas do produto.
+     *
+     * @return
+     */
+    public Set<ProdutoCaracteristica> getProdutoCaracteristicas() {
+        return Collections.unmodifiableSet(produtoCaracteristicas);
+    }
+
+    /**
+     * Obtém as imagens do produto.
+     *
+     * @return
+     */
+    public Set<ProdutoImagem> getImagens() {
+        return Collections.unmodifiableSet(imagens);
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -187,4 +242,5 @@ public class Produto {
                 ", caracteristicas=" + produtoCaracteristicas +
                 '}';
     }
+
 }

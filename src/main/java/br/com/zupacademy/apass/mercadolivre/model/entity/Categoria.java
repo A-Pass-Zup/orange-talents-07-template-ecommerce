@@ -37,4 +37,12 @@ public class Categoria {
         this.nome = nome;
         this.categoriaPai = categoriaPai;
     }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public Categoria getCategoriaPai() {
+        return this.categoriaPai;
+    }
 }
