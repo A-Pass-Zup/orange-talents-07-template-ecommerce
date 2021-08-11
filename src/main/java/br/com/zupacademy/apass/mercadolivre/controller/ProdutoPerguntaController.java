@@ -1,6 +1,7 @@
 package br.com.zupacademy.apass.mercadolivre.controller;
 
 import br.com.zupacademy.apass.mercadolivre.dto.request.NovaPerguntaRequest;
+import br.com.zupacademy.apass.mercadolivre.email.EscritorEmailNovaProdutoPergunta;
 import br.com.zupacademy.apass.mercadolivre.security.User;
 import br.com.zupacademy.apass.mercadolivre.service.MensageiroEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ProdutoPerguntaController {
 
         var pergunta = novaPerguntaRequest.converte(usuarioLogado.getUsuario(), this.entityManager);
 
-        this.mensageiroEmailService.envia(pergunta);
+        this.mensageiroEmailService.envia(new EscritorEmailNovaProdutoPergunta(pergunta));
 
         this.entityManager.merge(pergunta.getProduto());
 

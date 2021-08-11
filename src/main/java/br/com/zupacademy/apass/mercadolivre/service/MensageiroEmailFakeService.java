@@ -1,5 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.service;
 
+import br.com.zupacademy.apass.mercadolivre.email.EscritorDeEmail;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import br.com.zupacademy.apass.mercadolivre.model.entity.ProdutoPergunta;
 import org.springframework.context.annotation.Profile;
@@ -16,13 +17,7 @@ import java.util.Locale;
 public class MensageiroEmailFakeService implements MensageiroEmailService {
 
     @Override
-    public void envia(ProdutoPergunta pergunta) {
-
-
-        String email = "Para: " + pergunta.getProduto().getUsuarioCadastro().getLogin() + '\n'
-                + "O usuario '" + pergunta.getUsuario().getLogin() + "' fez a seguinte pergunta para o produto '"
-                + pergunta.getProduto().getNome() + "': " + pergunta.getTitulo() + " | " + pergunta.getDataHoraCadastro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-
-        System.out.println(email);
+    public void envia(EscritorDeEmail escritorDeEmail) {
+        System.out.println(escritorDeEmail.escreve());
     }
 }

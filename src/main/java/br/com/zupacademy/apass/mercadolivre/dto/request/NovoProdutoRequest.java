@@ -39,7 +39,7 @@ public class NovoProdutoRequest {
     private Long categoriaId;
 
     public NovoProdutoRequest(@NotBlank String nome,
-                              @NotNull @PositiveOrZero BigDecimal valor,
+                              @NotNull @Positive BigDecimal valor,
                               @NotNull @PositiveOrZero Integer quantidade,
                               @NotBlank @Size(max = 1000) String descricao,
                               @NotNull @Size(min = 3) Set<CaracteristicaRequest> caracteristicas,

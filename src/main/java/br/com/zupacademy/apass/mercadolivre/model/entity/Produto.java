@@ -230,6 +230,19 @@ public class Produto {
         return Collections.unmodifiableSet(imagens);
     }
 
+    /**
+     * Diminui a quantidade do produto.
+     *
+     * @param quantidade Precisa ser positivo (> 0) não nulo.
+     */
+    public void diminuiEstoque(@NotNull @Positive Integer quantidade) {
+
+        Assert.isTrue(quantidade > 0, "A quantidade para diminuir do estoque precisa ser positiva > 0!");
+        Assert.isTrue(quantidade <= this.quantidade, "Não pode diminuir a quantidade do produto mais do que está presente no estoque!");
+
+       this.quantidade -= quantidade;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
