@@ -1,11 +1,9 @@
 package br.com.zupacademy.apass.mercadolivre.compra;
 
-import br.com.zupacademy.apass.mercadolivre.compra.entity.Compra;
 import br.com.zupacademy.apass.mercadolivre.compra.pagamento.GatewayPagamento;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Produto;
 import br.com.zupacademy.apass.mercadolivre.model.entity.Usuario;
 import br.com.zupacademy.apass.mercadolivre.validation.constraints.ExistsId;
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;

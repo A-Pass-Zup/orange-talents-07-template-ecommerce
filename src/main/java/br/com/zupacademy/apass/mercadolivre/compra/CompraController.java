@@ -37,13 +37,13 @@ public class CompraController {
 
         try {
 
-            String uriRetorno = compra.processa(uriComponentsBuilder.toUriString());
+            compra.processa();
 
             this.entityManager.persist(compra);
 
             this.mensageiroEmailService.envia(new EscritorEmailNovaCompra(compra));
 
-            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, uriRetorno).build();
+            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, compra.geraLinkParaPagamento(uriComponentsBuilder.toUriString())).build();
 
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage());

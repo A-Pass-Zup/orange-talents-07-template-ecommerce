@@ -1,20 +1,23 @@
 package br.com.zupacademy.apass.mercadolivre.compra.pagamento;
 
-import br.com.zupacademy.apass.mercadolivre.compra.entity.Compra;
-import org.springframework.web.util.UriComponentsBuilder;
+import br.com.zupacademy.apass.mercadolivre.compra.Compra;
 
 public enum GatewayPagamento {
 
-    PAYPAL(new GeradorUrlPayPal()),
-    PAGSEGURO(new GeradorUrlPagSeguro());
+    PAYPAL(new GerenciadorPayPal()),
+    PAGSEGURO(new GerenciadorPagSeguro());
 
-    private GeradorUrlGatewayPagamento geradorUrlDoGatewayPagamento;
+    private GerenciadorGatewayPagamento geradorUrlDoGatewayPagamento;
 
-    GatewayPagamento(GeradorUrlGatewayPagamento geradorUrlDoGatewayPagamento) {
+    GatewayPagamento(GerenciadorGatewayPagamento geradorUrlDoGatewayPagamento) {
         this.geradorUrlDoGatewayPagamento = geradorUrlDoGatewayPagamento;
     }
 
     public String geraUrlRetorno(Compra compra, String baseUrl) {
-        return this.geradorUrlDoGatewayPagamento.gera(compra, baseUrl);
+        return this.geradorUrlDoGatewayPagamento.geraUrl(compra, baseUrl);
+    }
+
+    public StatusPagamento status(Object statusGateway) {
+        return this.geradorUrlDoGatewayPagamento.status(statusGateway);
     }
 }

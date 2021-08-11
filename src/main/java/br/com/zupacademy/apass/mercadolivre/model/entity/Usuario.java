@@ -55,13 +55,23 @@ public class Usuario {
     }
 
     @Deprecated
-    private Usuario() {}
+    protected Usuario() {}
 
-    public String getLogin() {
-        return this.login;
+    /**
+     * Obtém o id do usuário.
+     *
+     * @return
+     */
+    public Long getId() {
+        return this.id;
     }
 
-    public String getSenha() {
-        return this.senha;
+    /**
+     * Obtém o login do usuário.
+     *
+     * @return
+     */
+    public String getLogin() {
+        return this.login;
     }
 }

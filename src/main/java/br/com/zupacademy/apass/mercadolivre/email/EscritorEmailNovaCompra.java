@@ -1,6 +1,6 @@
 package br.com.zupacademy.apass.mercadolivre.email;
 
-import br.com.zupacademy.apass.mercadolivre.compra.entity.Compra;
+import br.com.zupacademy.apass.mercadolivre.compra.Compra;
 
 public class EscritorEmailNovaCompra implements EscritorDeEmail {
 
@@ -13,7 +13,7 @@ public class EscritorEmailNovaCompra implements EscritorDeEmail {
     @Override
     public String escreve() {
         return new StringBuilder()
-                .append("Para: ").append(this.compra.getLoginDonoProduto() + '\n')
+                .append("Para: ").append(this.compra.getLoginVendedor() + '\n')
                 .append("Mensagem: ").append("O usuário " + this.compra.getLoginComprador() + " deseja comprar " + this.compra.getQuantidade() + " unidade(s) do produto '" + this.compra.getNomeProduto() + "'")
                 .toString();
     }
