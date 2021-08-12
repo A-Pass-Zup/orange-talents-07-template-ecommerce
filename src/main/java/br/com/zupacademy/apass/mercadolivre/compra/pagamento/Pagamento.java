@@ -131,9 +131,11 @@ public class Pagamento {
         return status;
     }
 
-    public boolean processa() {
+    /**
+     * Processa o pagamento
+     */
+    public void processa() {
         this.compra.addPagamento(this);
-        return this.sucesso();
     }
 
     /**
