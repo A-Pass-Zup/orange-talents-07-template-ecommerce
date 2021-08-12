@@ -35,10 +35,13 @@ public class RetornoPagamentoController {
                                   @RequestBody @Valid ResultadoPagamentoResquest pagamentoRequest,
                                   UriComponentsBuilder uriComponentsBuilder) {
 
-        var compra = this.compraRepository.findByIdentificador(identificadorCompra)
+        final var gatewayPag = GatewayPagamento.valueOf(gatewayPagamento.toUpperCase());
+
+        var compra = this.compraRepository.findByGatewayPagamentoAndIdentificador(gatewayPag, identificadorCompra)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "A compra com identificação '" + identificadorCompra + "' não foi encontrada!"));
 
-        final var pagamento = pagamentoRequest.convert(compra, GatewayPagamento.valueOf(gatewayPagamento.toUpperCase()));
+
+        final var pagamento = pagamentoRequest.convert(compra, gatewayPag);
 
         try {
             pagamento.processa();
