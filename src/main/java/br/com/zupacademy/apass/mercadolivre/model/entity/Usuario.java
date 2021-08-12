@@ -55,7 +55,7 @@ public class Usuario {
     }
 
     @Deprecated
-    protected Usuario() {}
+    private Usuario() {}
 
     /**
      * Obtém o id do usuário.
@@ -73,5 +73,14 @@ public class Usuario {
      */
     public String getLogin() {
         return this.login;
+    }
+
+    /**
+     * Obtém a senha criptografada do usuario
+     *
+     * @return
+     */
+    public String getSenha() {
+        return this.senha;
     }
 }

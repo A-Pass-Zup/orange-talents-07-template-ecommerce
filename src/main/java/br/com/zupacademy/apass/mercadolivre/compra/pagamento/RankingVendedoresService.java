@@ -14,7 +14,7 @@ public class RankingVendedoresService {
 
         final var request = new RankingVendedoresRequest(pagamento.getIdCompra(), pagamento.getIdVendedor());
 
-        restTemplate.postForEntity("http://localhost:8080/outros-sistemas/ranking-vendedores", request, String.class);
+        restTemplate.postForEntity("http://localhost:8080/api/v1/outros-sistemas/ranking-vendedores", request, String.class);
 
     }
 }

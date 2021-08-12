@@ -2,6 +2,7 @@ package br.com.zupacademy.apass.mercadolivre.compra.pagamento;
 
 import br.com.zupacademy.apass.mercadolivre.compra.Compra;
 import br.com.zupacademy.apass.mercadolivre.compra.pagamento.Pagamento;
+import br.com.zupacademy.apass.mercadolivre.validation.constraints.UniqueValue;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,6 +12,7 @@ public class ResultadoPagamentoResquest {
     private Object status;
 
     @NotNull
+    @UniqueValue(domainClass = Pagamento.class, fieldName = "identificador")
     private String idPagamento;
 
     /**

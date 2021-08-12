@@ -11,6 +11,10 @@ import java.util.Objects;
 @Entity
 public class Pagamento {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull
     @ManyToOne(optional = false)
     private Compra compra;
@@ -25,7 +29,7 @@ public class Pagamento {
     private StatusPagamento status;
 
     @NotNull
-    private LocalDateTime dataHoraRegistro;
+    private LocalDateTime dataHoraRegistro = LocalDateTime.now();
 
     @Deprecated
     protected Pagamento() {

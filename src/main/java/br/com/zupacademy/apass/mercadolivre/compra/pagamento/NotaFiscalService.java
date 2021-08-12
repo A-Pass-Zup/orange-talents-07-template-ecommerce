@@ -15,7 +15,7 @@ public class NotaFiscalService {
 
         final var notaFiscalRequest = new NotaFiscalRequest(pagamento.getIdCompra(), pagamento.getIdComprador());
 
-        restTemplate.postForEntity("http://localhost:8080/outros-sistemas/nota-fiscal", notaFiscalRequest, String.class);
+        restTemplate.postForEntity("http://localhost:8080/api/v1/outros-sistemas/nota-fiscal", notaFiscalRequest, String.class);
 
     }
 }

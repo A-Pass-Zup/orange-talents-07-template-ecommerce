@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -43,14 +44,13 @@ public class Compra {
     private Usuario comprador;
 
     @OneToMany(mappedBy = "compra", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    private Set<Pagamento> pagamentos;
+    private Set<Pagamento> pagamentos = new HashSet<>();
 
     /**
      * Construtor usado pela JPA. Não utilize.
      */
     @Deprecated
     protected Compra() {
-        this.finalizaSeExistirPagamentoComSucesso();
     }
 
     /**
@@ -186,7 +186,7 @@ public class Compra {
     public void addPagamento(Pagamento pagamento) throws IllegalCallerException {
         this.naoPermiteEfetuarOperacaoComStatusFinalizada("Não pode efetuar o pagamente de uma compra com status paga/finalizada!");
 
-        Assert.isTrue(this.pagamentos.stream().anyMatch(pagamento::equals), "Não pode adicionar uma pagamento que já existe!");
+        Assert.isTrue(this.pagamentos.stream().noneMatch(pagamento::equals), "Não pode adicionar uma pagamento que já existe!");
 
         this.pagamentos.add(pagamento);
     }

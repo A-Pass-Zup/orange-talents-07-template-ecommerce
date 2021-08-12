@@ -6,10 +6,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -50,13 +47,13 @@ public class Produto {
     private Usuario usuarioCadastro;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
-    private Set<ProdutoImagem> imagens;
+    private Set<ProdutoImagem> imagens = new HashSet<>();
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
-    private List<ProdutoOpiniao> opinioes;
+    private List<ProdutoOpiniao> opinioes = new ArrayList<>();
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
-    private List<ProdutoPergunta> perguntas;
+    private List<ProdutoPergunta> perguntas = new ArrayList<>();
 
     /**
      * Construtor padrão para a JPA. Não use.
